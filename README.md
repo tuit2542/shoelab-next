@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shoelab (Next.js Edition) 👟🧪
 
-## Getting Started
+**Shoelab** เป็นแพลตฟอร์มวิเคราะห์และเปรียบเทียบรองเท้าวิ่งเชิงลึก ที่ช่วยให้นักวิ่งสามารถนำข้อมูลสเปครองเท้า (ความหนาพื้น, ชนิดโฟม, น้ำหนัก) มาคำนวณและประเมินเป็นค่าทาง **ฟิสิกส์ (Physical)** และ **ชีวกลศาสตร์ (Biomechanical)** ได้อย่างง่ายดาย
 
-First, run the development server:
+โปรเจกต์นี้พัฒนาต่อยอดมาจากเวอร์ชัน HTML/JS เดิม โดยยกเครื่องใหม่ด้วย **Next.js (App Router)**, **React**, และ **Tailwind CSS** เพื่อให้ทำงานได้รวดเร็ว รองรับ Component-based Architecture และพร้อมสำหรับการ Scale ในอนาคต
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ ฟีเจอร์เด่น (Key Features)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **📊 Dynamic Battle Section (Head-to-Head):** เลือกรองเท้า 2 คู่มาประชันกันแบบตัวต่อตัว พร้อมระบบสร้างกราฟเรดาร์ (Radar Chart) และสรุปผลผู้ชนะให้อัตโนมัติตามสเปคที่วิเคราะห์ได้
+- **🔬 Lab Report Modal:** เจาะลึกข้อมูลของรองเท้าแต่ละคู่ด้วยเรดาร์ชาร์ต และตัวเลขเชิงลึก (เช่น Energy Return, Peak GRF, Asker C Softness)
+- **📂 Smart Excel Import:** สามารถอัปโหลดไฟล์ Excel เพื่อเพิ่มฐานข้อมูลรองเท้าใหม่ได้ทันที โดยระบบมี **Fallback Logic** ที่สามารถประเมินค่าความเด้ง, ความนุ่ม, และแรงกระแทกได้อัตโนมัติ หากข้อมูลบางคอลัมน์ขาดหายไป
+- **💾 Local Storage Persistence:** ข้อมูลที่ Import เข้ามาจะถูกจำไว้ในเบราว์เซอร์อัตโนมัติ ทำให้ข้อมูลไม่หายไปเมื่อกดรีเฟรชหน้าจอ
+- **🔍 Smart Search & Filters:** ค้นหารองเท้าจากการพิมพ์ชื่อ หรือกรองตามแบรนด์/จุดประสงค์ได้อย่างรวดเร็ว
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🚀 วิธีการติดตั้งและรันโปรเจกต์ (Getting Started)
 
-To learn more about Next.js, take a look at the following resources:
+โปรเจกต์นี้ใช้ `npm` ในการจัดการแพ็กเกจ
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **โคลนโปรเจกต์ (Clone the repository)**
+   ```bash
+   git clone <repository-url>
+   cd shoelab-next
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **ติดตั้ง Dependencies**
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **รันเซิร์ฟเวอร์โหมด Development**
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. เปิดเบราว์เซอร์และเข้าไปที่ [http://localhost:3000](http://localhost:3000)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📝 โครงสร้างข้อมูล Excel สำหรับนำเข้า (Import Template)
+
+ระบบรองรับไฟล์ `.xlsx` และ `.csv` โดยมีคอลัมน์หลักดังนี้:
+
+| คอลัมน์ (Column) | คำอธิบาย | ตัวอย่าง |
+| :--- | :--- | :--- |
+| `brand` | ชื่อแบรนด์ | Adidas |
+| `name` | ชื่อรุ่นรองเท้า | Adizero Pro |
+| `foam` | ชนิดโฟม | Lightstrike Pro |
+| `tech` | เทคโนโลยีเสริม (เช่น คาร์บอน) | EnergyRods |
+| `stack` | ความหนา ส้น/หน้าเท้า (มม.) | 39/33 |
+| `weight` | น้ำหนัก (กรัม) | 205 |
+| `drop` | ความชัน (มม.) | 6 |
+| `price` | ราคา (บาท) | 8500 |
+
+*หมายเหตุ: คอลัมน์อื่นๆ เช่น `energy_return_percent`, `stack_heel_mm` หากไม่ได้ระบุ ระบบจะใช้ AI/Logic (ใน `useShoes.ts`) ประเมินค่าให้อัตโนมัติจากชนิดโฟมและความหนาที่ระบุไว้*
+
+---
+
+## 🛠️ เทคโนโลยีที่ใช้ (Tech Stack)
+
+- **Framework:** Next.js (App Router)
+- **UI & Styling:** React, Tailwind CSS
+- **Icons:** Lucide React
+- **Charts:** Chart.js, react-chartjs-2
+- **Data Parsing:** xlsx (SheetJS)
+
+---
+
+## 👨‍💻 การพัฒนาต่อยอด (Development)
+- โค้ดส่วนคำนวณและจัดการ State จะอยู่ที่ `src/hooks/useShoes.ts`
+- หน้าตาของ Component ต่างๆ แบ่งย่อยตามฟีเจอร์ไว้ใน `src/components/features/`
+- หากต้องการปรับปรุงเงื่อนไขการแพ้-ชนะ ใน Battle Section สามารถเข้าไปแก้ไขได้ที่ `src/components/features/BattleSection.tsx`
